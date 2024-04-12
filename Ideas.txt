@@ -1,0 +1,7 @@
+Simulate a black hole, use particles with 1% opacity, when alot of them overlap it gets brighter, also have them randomized colors 
+but have the colors be proportional to the stars kelvin color
+
+
+Maybe simulate f1 drs and measure the hypothetical drag
+
+based on 30000
