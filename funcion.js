@@ -1,10 +1,12 @@
 
 
-(function tester(testval) {
+function tester(testval) {
     return("hello " + testval);
-})("test");
+}("test");
+
 
 
 let result = tester("test");
 
 console.log(result);
+
