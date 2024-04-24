@@ -7,7 +7,9 @@ switch (myFruit) {
 }
 
 let fruits = new Set(["lemon","watermelon"]);
-let test = (fruits.has(myFruit)) ? "YES" : "NO";
+/*let test = (fruits.has(myFruit)) ? "YES" : "NO";
 
-console.log(test);
+console.log(test)*/
 
+
+console.log((fruits.has(myFruit)) ? "YES" : "NO")
