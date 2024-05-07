@@ -10,68 +10,79 @@ window.addEventListener('resize',function(){
     ctx.fillStyle = 'white';
    
 })
-let Group;
 
+
+
+   
+  
+
+const mesto = {
+    x : undefined,
+    y : undefined,
+};
+let x;
 window.addEventListener("click",function(e){
    
-    let x = e.pageX
-    let y = e.pageY
+    mesto.x = e.pageX
+    mesto.y = e.pageY
     
-    Group = new Particle();
-    Group.draw(x,y)
-
-    animation();
+    //Group = new Particle();
+    //draw(mesto.x,mesto.y);
+    ctx.clearRect(0, 0, canvas.width, canvas.height); 
+    animate();
 })
   
-class Particle{
+canvas.addEventListener("mousemove",function(e){
+   
+    mesto.x = e.pageX
+    mesto.y = e.pageY
+    
+})
+setTimeout(() => {
+            x = mesto.x;
+            console.log(x)
+        }, 10000 / 1);
 
-    constructor() {
-        this.particles = [];
-    }
-
-
-
-    particle(x,y){
+function draw(x,y){
+    let i = 0
+    while (i <= 5){
+        ctx.beginPath();
         ctx.fillStyle = 'white';
-        ctx.rect(x,y,2,2)
-        ctx.fill();
-        this.particles.push({x ,y})
+        ctx.rect(x + i*4 ,y + i*4,2,2);
+        ctx.rect(x + i*4 ,y + -(i*4),2,2);
+
+        ctx.rect(x + -(i*4) ,y + i*4,2,2);
+        ctx.rect(x + -(i*4) ,y + -(i*4),2,2);
+
+        ctx.rect(x + i*6 ,y,2,2);
+        ctx.rect(x +  -(i*6) ,y,2,2);
+
+        ctx.rect(x,y + i*6 ,2,2);
+        ctx.rect(x,y +  -(i*6) ,2,2);
+         ctx.fill();
+         console.log("hi");
+        
+        i++;
+         
     }
-    draw(x,y){
-        let i = 0
-        while (i <= 5){
-            this.particle(x + i*4 ,y + i*4);
-            this.particle(x + i*4 ,y + -(i*4));
-
-            this.particle(x + -(i*4) ,y + i*4);
-            this.particle(x + -(i*4) ,y + -(i*4));
-
-            this.particle(x + i*6 ,y);
-            this.particle(x +  -(i*6) ,y);
-
-            this.particle(x,y + i*6 );
-            this.particle(x,y +  -(i*6) );
-            i++;
-        }
-    }
-    update(){
-    this.particles.forEach(particle => {
-        particle.y += 1;
-    });
-    // Clear the canvas before drawing
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // Redraw particles with updated positions
-    this.draw();
 }
 
 
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); 
+    draw(mesto.x,mesto.y);
+
+    if (x !== mesto.x){
+       
+    setTimeout(() => {
+            requestAnimationFrame(animate);
+            x = mesto.x;
+        }, 1000 / 75);
+         
+    }
+     
     
 }
-function animation(){
-     requestAnimationFrame(animation);
-    if(Group){
-        Group.update();
-        ctx.clearRect(0,0, canvas.width, canvas.height);
-        Group.draw();
-    }
-}
+
+
+//animate();
