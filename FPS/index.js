@@ -24,13 +24,15 @@ window.addEventListener("click",function(e){
     unadjustedMovement: true,})
     
 
-     ifpressed = true;
-
   
 console.log(ParticlesArray);
    // animate();
 })
-
+window.addEventListener("mousedown",function(e){
+   
+     ifpressed = true;
+ 
+})
 window.addEventListener("mouseup",function(e){
    
      ifpressed = false;
@@ -93,7 +95,7 @@ class Targets {
     drawObject(){
         ctx.beginPath();
         ctx.fillStyle = 'grey'
-        ctx.rect(canvas.width + this.x - mouse.x, canvas.height - (30+ canvas.height/(this.close **2)) - (Math.sqrt(this.close)*2) - mouse.y *2 ,this.close, this.close + this.close/7)
+        ctx.rect(canvas.width + this.x - mouse.x, canvas.height - (15+ canvas.height/(this.close **2)) - (Math.sqrt(this.close)*2) - mouse.y *2 ,this.close, this.close + this.close/7)
         ctx.fill();
 }
 
