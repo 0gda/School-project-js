@@ -4,6 +4,8 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+canvas.requestPointerLock();
+
 window.addEventListener('resize',function(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -46,50 +48,30 @@ window.addEventListener("mouseup",function(e){
 })
 
 
- 
-
-setTimeout(() => {
-            x = mesto.x;
-            console.log(x)
-        }, 10000 / 1);
 
 
 
-function draw(x,y){
-    let i = 0
-    while (i <= 5){
+function draw(){
         ctx.beginPath();
         ctx.fillStyle = 'white';
-        ctx.rect(x + i*4 ,y + i*4,2,2);
-        ctx.rect(x + i*4 ,y + -(i*4),2,2);
-
-        ctx.rect(x + -(i*4) ,y + i*4,2,2);
-        ctx.rect(x + -(i*4) ,y + -(i*4),2,2);
-
-        ctx.rect(x + i*6 ,y,2,2);
-        ctx.rect(x +  -(i*6) ,y,2,2);
-
-        ctx.rect(x,y + i*6 ,2,2);
-        ctx.rect(x,y +  -(i*6) ,2,2);
-         ctx.fill();
-         console.log("hi");
+        ctx.arc(mesto.x,mesto.y,10,0,360);
+        ctx.fill();
         
-        i++;
-         
-    }
+        
+    
 }
 
 
 function animate() {
     //ctx.clearRect(0, 0, canvas.width, canvas.height); 
-    draw(mesto.x,mesto.y);
+    draw();
 
     
        
     setTimeout(() => {
             requestAnimationFrame(animate);
-            x = mesto.x;
-        }, 1000 / 75);
+           
+        }, 1000 / 500);
          
     
      
