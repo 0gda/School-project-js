@@ -5,7 +5,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 window.addEventListener('resize',function(){
-    canvas.width = window.innerWidth;
+    canvas.width = 3 * window.innerWidth;
     canvas.height = window.innerHeight;
     ctx.fillStyle = 'white';
    
@@ -13,21 +13,26 @@ window.addEventListener('resize',function(){
 
 const ParticlesArray = [];
 const ObjectsArray = [];
-const mesto = {
-    x : undefined,
-    y : undefined,
+let mouse = {
+    x : canvas.width/2,
+    y : canvas.width/2,
 };
 let x;
 let ifpressed = false;
-window.addEventListener("mousedown",function(e){
-   
-     ifpressed = true;
+window.addEventListener("click",function(e){
+   canvas.requestPointerLock({
+    unadjustedMovement: true,})
+    
 
   
 console.log(ParticlesArray);
    // animate();
 })
-
+window.addEventListener("mousedown",function(e){
+   
+     ifpressed = true;
+ 
+})
 window.addEventListener("mouseup",function(e){
    
      ifpressed = false;
@@ -36,8 +41,9 @@ window.addEventListener("mouseup",function(e){
 
 
  canvas.addEventListener("mousemove",function(e){
-    mesto.x = e.pageX
-    mesto.y = e.pageY 
+    mouse.x += e.movementX;
+    mouse.y += e.movementY;
+ 
    if(ifpressed){
      for (let i = 0;i < 20;i++){
         ParticlesArray.push(new Particle())
@@ -50,14 +56,14 @@ window.addEventListener("mouseup",function(e){
    function drawsky(){
         ctx.beginPath();
         ctx.fillStyle = 'lightblue'
-        ctx.rect(0,0,canvas.width,canvas.height - mesto.y)
+        ctx.rect(0,0,canvas.width,canvas.height - (mouse.y * 2))
         ctx.fill();
     }
 
     function crosshair(){
         ctx.beginPath();
         ctx.fillStyle = 'red'
-        let i = 0;
+        let i = 2;
          while (i <= 5){
         ctx.rect(canvas.width / 2 + i*4 ,canvas.height /2 + i*4,2,2);
         ctx.rect(canvas.width / 2 + i*4 ,canvas.height /2 + -(i*4),2,2);
@@ -70,36 +76,41 @@ window.addEventListener("mouseup",function(e){
     }
 class Targets {
     constructor(){
-        this.x = mesto.x
-        this.y = mesto.y
-        this.close = Math.random() * 50 + 1
+        this.x = Math.random() * (canvas.width - (-canvas.width)) + (-canvas.width);
+        this.y = Math.random() * (canvas.height) + 50;
+        this.close = Math.random() * 200 + 30;
     }
     draw(){
         ctx.beginPath();
         ctx.fillStyle = 'grey';
-        ctx.rect(canvas.width - this.x,canvas.height - this.y -this.close,this.close,this.close + 10);
+        ctx.rect(this.x,this.y,this.close,this.close + 10);
         ctx.fill();
     }
-}
+    update(){
+        this.x = mouse.x - canvas.width
+        this.y = mouse.y - canvas.height
+    
+    }
 
-
-
-    function drawObject(){
+    drawObject(){
         ctx.beginPath();
         ctx.fillStyle = 'grey'
-        ctx.rect(canvas.width - mesto.x,canvas.height - mesto.y ,60, 70)
+        ctx.rect(canvas.width + this.x - mouse.x, canvas.height - (15+ canvas.height/(this.close **2)) - (Math.sqrt(this.close)*2) - mouse.y *2 ,this.close, this.close + this.close/7)
         ctx.fill();
-    }
-
-
-for (let i = 0;i < 5;i++){
-    ObjectsArray.push(new Targets())
 }
+
+}
+
+    //function 
+   // }
+
+
+
 
 class Particle {
     constructor(){
-        this.x = mesto.x
-        this.y = mesto.y
+        this.x = mouse.x 
+        this.y = mouse.y
         this.size = Math.random() * 3 + 1;
         this.speedX = Math.random() * 6 -3;
         this.speedY = Math.random() * 6 -3;
@@ -134,18 +145,22 @@ class Particle {
     }
 }
 }
-
+for (let i = 0;i < 10;i++){
+    ObjectsArray.push(new Targets())
+}
 
 function handleObjects(){
     for (let i = 0; i < ObjectsArray.length;i++){
-        ObjectsArray[i].draw();
+         //ObjectsArray[i].update(); 
+          ObjectsArray[i].drawObject();
+     
     }
 
 }
 
 function handleParticles(){
     for (let i = 0;i < ParticlesArray.length;i++){
-        ParticlesArray[i].update();
+       ParticlesArray[i].update();
         ParticlesArray[i].draw();
         if (ParticlesArray[i].size <= 0.2){
             ParticlesArray.splice(i, 1);
@@ -161,16 +176,17 @@ function animate() {
     //Particle.update()
     
     drawsky();
-    drawObject();
-    crosshair();
+    //drawObject();
+  
     //ctx.fillStyle = 'rgba(0,0,0,0.11)';
     //ctx.fillRect(0, 0, canvas.width, canvas.height);
     handleParticles();
     handleObjects();
+    crosshair();
     setTimeout(() => {
-            //console.log(ObjectsArray.length)
+            //console.log(ObjectsArray)
             requestAnimationFrame(animate);
-            x = mesto.x;
+            x = mouse.x;
         }, 1000 / 244);
          
     
