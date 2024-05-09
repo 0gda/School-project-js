@@ -51,7 +51,13 @@ window.addEventListener("mouseup",function(e){
    }
     
 })
-
+canvas.addEventListener("keypress", function(k) {
+   
+    if (event.key === "w") {
+     mouse.z = 5;
+     
+    }
+});
 
    function drawsky(){
         ctx.beginPath();
