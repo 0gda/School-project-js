@@ -108,7 +108,7 @@ function animate() {
     //Particle.draw(this.x,this.y);
     //Particle.update()
     
-    ctx.fillStyle = 'rgba(0,0,0,0.11)';
+    ctx.fillStyle = 'rgba(0,0,0,0.091)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     handleParticles();
        
