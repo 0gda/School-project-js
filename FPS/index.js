@@ -16,6 +16,7 @@ const ObjectsArray = [];
 let mouse = {
     x : canvas.width/2,
     y : canvas.width/2,
+    z : 100,
 };
 let x;
 let ifpressed = false;
@@ -51,10 +52,14 @@ window.addEventListener("mouseup",function(e){
    }
     
 })
-canvas.addEventListener("keypress", function(k) {
-   
-    if (event.key === "w") {
-     mouse.z = 5;
+window.addEventListener("keydown", function(k) {
+   let key = k.key;
+    if (key === "w" || key === "W") {
+     mouse.z += 1;
+     
+    }
+    if (key === "s" || key === "S") {
+     mouse.z -= 1;
      
     }
 });
@@ -82,26 +87,19 @@ canvas.addEventListener("keypress", function(k) {
     }
 class Targets {
     constructor(){
+       // this.z = mouse.z;
         this.x = Math.random() * (canvas.width - (-canvas.width)) + (-canvas.width);
         this.y = Math.random() * (canvas.height) + 50;
         this.close = Math.random() * 200 + 30;
+        
     }
-    draw(){
-        ctx.beginPath();
-        ctx.fillStyle = 'grey';
-        ctx.rect(this.x,this.y,this.close,this.close + 10);
-        ctx.fill();
-    }
-    update(){
-        this.x = mouse.x - canvas.width
-        this.y = mouse.y - canvas.height
+  
     
-    }
-
     drawObject(){
+        this.z = (mouse.z/100) * this.close;
         ctx.beginPath();
         ctx.fillStyle = 'grey'
-        ctx.rect(canvas.width + this.x - mouse.x, canvas.height - (15+ canvas.height/(this.close **2)) - (Math.sqrt(this.close)*2) - mouse.y *2 ,this.close, this.close + this.close/7)
+        ctx.rect(canvas.width + this.x - mouse.x, canvas.height - (15 + canvas.height/(this.close **2)) - (Math.sqrt(this.close)*2) - mouse.y *2 ,this.close, this.close + this.close/7)
         ctx.fill();
 }
 

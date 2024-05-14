@@ -1,0 +1,15 @@
+html,body{
+    width: 100% ;
+    height:98% ;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#text {
+    height:100% ;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background: radial-gradient(black,rgb(28, 1, 51));
+}
