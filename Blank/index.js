@@ -7,8 +7,6 @@ canvas.height = window.innerHeight;
 window.addEventListener('resize',function(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    ctx.fillStyle = 'white';
-   
 })
 
 const ParticlesArray = [];
@@ -24,7 +22,7 @@ window.addEventListener("click",function(e){
 
    console.log(ParticlesArray.velocityX);
        // while(ParticlesArray.length < 600){
-             for (let i = 0;i < 100;i++){
+             for (let i = 0;i < 5;i++){
              ParticlesArray.push(new Particle())
             }
        // }
@@ -54,13 +52,13 @@ window.addEventListener("mouseup",function(e){
 
 class Hole{
     constructor(){
-        this.mass = 100;
+        this.mass = 10;
         this.size = 50;
         this.x = canvas.width/2;
         this.y = canvas.height/2;
     }
     draw(){
-        ctx.fillStyle = 'rgba(0,0,0,0.1)';
+        ctx.fillStyle = 'rgba(0,0,0,0.51)';
         ctx.beginPath();
         ctx.arc(this.x,this.y,this.size,0,360);
         ctx.fill();
@@ -74,11 +72,11 @@ class Particle {
     constructor(){
         this.hole = hole;
         this.x = Math.random() < 0.5 ? 0 : canvas.width;
-        this.y = Math.random() < 0.5 ? 0 : canvas.height;
-        this.velocityX = Math.random() * 50 - 50 ;
-        this.velocityY = Math.random() * 50 - 50 ;;
+        this.y = Math.random() * canvas.height + 1 ;
+        this.velocityX = Math.random() * 1 - 10 ;
+        this.velocityY = Math.random() * 10 - 10 ;;
         this.size = Math.random() * 10 + 5
-        this.time = 60;
+        this.time = 160;
    
         /*
         this.velocityX = (this.hole.mass * this.size) / (this.hole.x - this.x)
@@ -108,7 +106,7 @@ class Particle {
     let i = 0
     while (i <= 5){
         ctx.beginPath();
-        ctx.fillStyle = 'rgba(255,255,255,0.01)';
+        ctx.fillStyle = 'rgba(255,255,255,1)';
         //ctx.rect(this.x + i*4 ,this.y + i*4,this.size,this.size);
         ctx.arc(this.x,this.y,5,0,360);
          ctx.fill();
@@ -127,7 +125,7 @@ function handleParticles(hole){
         ParticlesArray[i].update();
         ParticlesArray[i].draw();
         
-        if (ParticlesArray[i].x - hole.x == hole.size || ParticlesArray[i].time <= 1 || (ParticlesArray[i].distance - hole.x >= hole.mass && ParticlesArray[i].time <= 55)  ){
+        if (ParticlesArray[i].x - hole.x == hole.size || ParticlesArray[i].time <= 1 || (ParticlesArray[i].distance - hole.x >= hole.mass && ParticlesArray[i].time <= 20)  ){
            ParticlesArray.splice(i, 1);
             i--;
         }
@@ -145,11 +143,11 @@ function animate() {
     handleParticles(hole);
     hole.draw();
        
-    setTimeout(() => {
+    //setTimeout(() => {
             console.log(ParticlesArray.length)
             requestAnimationFrame(animate);
            
-        }, 1000 / 130);
+     //   }, 1000 / 230);
          
     
      
@@ -158,12 +156,12 @@ function animate() {
 
 function eraseSlowly(){
     ctx.fillStyle = 'rgba(0,0,0,0.091)';
-   ctx.fillRect(0, 0, canvas.width, canvas.height);
-   setTimeout(() => {
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+   //setTimeout(() => {
             console.log(ParticlesArray.length)
             requestAnimationFrame(eraseSlowly);
            
-        }, 1000 / 1);
+     //   }, 1000 / 1);
 }
 eraseSlowly();
 

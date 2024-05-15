@@ -53,7 +53,7 @@ class Particle {
     constructor(){
         this.x = mesto.x
         this.y = mesto.y
-        this.size = Math.random() * 3 + 1;
+        this.size = Math.random() * 5 + 1;
         this.speedX = Math.random() * 6 -3;
         this.speedY = Math.random() * 6 -3;
     }
@@ -65,28 +65,18 @@ class Particle {
 
     draw(){
     let i = 0
-    while (i <= 5){
+   
         ctx.beginPath();
         ctx.fillStyle = 'white';
-        ctx.rect(this.x + i*4 ,this.y + i*4,this.size,this.size);
-        ctx.rect(this.x + i*4 ,this.y + -(i*4),this.size,this.size);
-
-        ctx.rect(this.x + -(i*4) ,this.y + i*4,this.size,this.size);
-        ctx.rect(this.x + -(i*4) ,this.y + -(i*4),this.size,this.size);
-
-        ctx.rect(this.x + i*6 ,this.y,this.size,this.size);
-        ctx.rect(this.x +  -(i*6) ,this.y,this.size,this.size);
-
-        ctx.rect(this.x,this.y + i*6 ,this.size,this.size);
-        ctx.rect(this.x,this.y +  -(i*6) ,this.size,this.size);
+        ctx.arc(this.x + i*4 ,this.y + i*4,this.size,0,360);
          ctx.fill();
          //console.log("hi");
         
-        i++;
+      
          
     }
 }
-}
+
 
 
 

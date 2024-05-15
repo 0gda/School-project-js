@@ -11,11 +11,6 @@ window.addEventListener('resize',function(){
    
 })
 
-
-
-   
-  
-
 const mesto = {
     x : undefined,
     y : undefined,
@@ -25,7 +20,8 @@ let ifpressed = false;
 window.addEventListener("mousedown",function(e){
    
      ifpressed = true;
- 
+    mesto.x = e.pageX
+    mesto.y = e.pageY
     //animate();
 })
 
@@ -63,17 +59,7 @@ function draw(){
 function animate() {
     //ctx.clearRect(0, 0, canvas.width, canvas.height); 
     draw();
-
-    
-       
-    setTimeout(() => {
             requestAnimationFrame(animate);
-           
-        }, 1000 / 500);
-         
-    
-     
-    
 }
 
 
