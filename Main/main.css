@@ -19,7 +19,7 @@ h1 {
     font-size: 60px;
     font-family: novem;
     text-align: center;
-    background: radial-gradient(rgb(209, 235, 209),black);
+    background: radial-gradient(rgb(209, 235, 209),rgb(0, 14, 7));
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }

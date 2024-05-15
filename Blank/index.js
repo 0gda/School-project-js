@@ -7,8 +7,6 @@ canvas.height = window.innerHeight;
 window.addEventListener('resize',function(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    ctx.fillStyle = 'white';
-   
 })
 
 const ParticlesArray = [];
