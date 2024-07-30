@@ -11,6 +11,7 @@ html,body{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    
 }
 
 #text {
@@ -18,7 +19,35 @@ html,body{
     top: 0;
     left: 0;
     position: absolute;
-    background: radial-gradient(black,rgb(28, 1, 51));
+    background: radial-gradient(black,rgb(0, 0, 0));
     z-index: -1;
 }
 
+h1 {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: fit-content;
+    color: aliceblue;
+}
+
+
+div{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: relative;
+    top: 50%;
+    left: 10%;
+    width: fit-content;
+    background: linear-gradient(orange,purple);
+    justify-content: center;
+}
+
+
+input,label {
+    width: 95%;
+    display: block;
+    padding: 2%;
+}

@@ -2,12 +2,20 @@
 let canvas = window;
 
 
+
 document.querySelector("h1").onmouseover = () => {
    Hack("h1",10,1/3);
 }
 
+document.getElementById('menu').addEventListener('click', function() {
+    this.classList.toggle('Menu');
+});
+
+
 window.onload = h => {
+    setTimeout(() => {
    Hack("h1",15,1/5);
+   },1500);
    setTimeout(() => {
     var i = 0;
     var text = document.getElementById("small").dataset.text;
@@ -18,10 +26,10 @@ window.onload = h => {
         document.getElementById("small").innerHTML += text.charAt(i);
         i++;
     setTimeout(typing, wait);
-  }
+    }
 }
  
-   },1500);
+   },2500);
   
 }
 
@@ -55,7 +63,7 @@ function Hack(target,speed,iterations){
      },speed);
 }
 //setTimeout(() =>{
-    let flash = undefined;
+   /* let flash = undefined;
     document.body.onclick = () => {
         
         if(flash == undefined){
@@ -74,17 +82,52 @@ function Hack(target,speed,iterations){
        
        
         
-    }
+    } 
 
     }
-    
+    */
     
       
 //},1000);
+const images = ['limage','cimage','rimage'];
+
+
+    
+    
+function Rotate (){
+    const current = document.querySelector('img.cimage');
+    const next = document.querySelector('img.rimage');
+    const prev = document.querySelector('img.limage');
+
+    const currentClass = current.className;
+    const nextClass = next.className;
+    const prevClass = prev.className;
+
+
+
+    prev.className = currentClass;
+    current.className = nextClass;
+    next.className = prevClass;
+
+   prev.removeEventListener('click', Rotate);
+   next.removeEventListener('click', Rotate);
+   current.removeEventListener('click', Rotate);
+
+    document.querySelector('img.cimage').addEventListener("click", Rotate)
+
+
+};
+    
+document.querySelector('img.cimage').addEventListener("click", Rotate)
+
+
+
+
 document.querySelectorAll("a").forEach(a => {
     a.addEventListener("mouseover", () => {
     function playSound(){
         let audio = new Audio("../hover.mp3");
+        audio.volume(0.5);
     audio.play();
     }
     playSound();

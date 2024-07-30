@@ -18,6 +18,7 @@
     })
 
     let clicked = false;
+    let started = false;
 
     class Hole{
     constructor(){
@@ -33,6 +34,11 @@
         ctx.fill();
     }
 }
+
+
+
+
+
 let hole = new Hole;
 const Textparticles = [];
     class Particle {
@@ -188,19 +194,22 @@ const mesto = {
     x : undefined,
     y : undefined,
 };
-window.addEventListener("click",function(){
-    clicked = true;
+
+document.querySelector("h1").onclick = function(){
+  clicked = true;
+    
+    document.querySelector("h1").remove();
        // while(ParticlesArray.length < 600){
-             for (let i = 0;i < 10;i++){
+             for (let i = 0;i < 20;i++){
              ParticlesArray.push(new Particles())
             }
        // }
    
 
    // animate();
-})
+}
 
-
+  
 
  canvas.addEventListener("mousemove",function(e){
     mesto.x = e.pageX
@@ -309,8 +318,9 @@ function animate() {
 }
 
 function eraseSlowly(){
-    ctx.fillStyle = 'rgba(0,0,0,0.041)';
+    ctx.fillStyle = 'rgba(0,0,0,0.081)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fill();
    //setTimeout(() => {
            // console.log(ParticlesArray.length)
             requestAnimationFrame(eraseSlowly);

@@ -11,32 +11,60 @@ window.addEventListener('resize',function(){
    
 })
 
-const mesto = {
+
+
+//our drawing variables/tools
+
+
+let colorPicker = document.getElementById('color-picker');
+let selectedColor;
+colorPicker.addEventListener('input', function() {
+        selectedColor = colorPicker.value;
+        //console.log(selectedColor);
+    });
+
+//eraser
+document.getElementById("erase").addEventListener("click", () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); 
+})
+
+let number = document.getElementById('number');
+let size = 15;
+number.addEventListener('input', () => {
+        size = number.value;
+        //console.log(size);
+    });
+
+
+
+const position2 = {
     x : undefined,
     y : undefined,
 };
-let x;
+
+const position = {
+    x : undefined,
+    y : undefined,
+};
+
 let ifpressed = false;
+
 window.addEventListener("mousedown",function(e){
-   
      ifpressed = true;
-    mesto.x = e.pageX
-    mesto.y = e.pageY
-    //animate();
+     position2.x = e.pageX
+     position2.y = e.pageY
 })
 
 window.addEventListener("mouseup",function(e){
-   
      ifpressed = false;
- 
 })
-
-
 
  canvas.addEventListener("mousemove",function(e){
    if(ifpressed){
-    mesto.x = e.pageX
-    mesto.y = e.pageY
+    position.x = e.pageX
+    position.y = e.pageY
+    draw(selectedColor,size);    
+
    }
     
 })
@@ -45,22 +73,33 @@ window.addEventListener("mouseup",function(e){
 
 
 
-function draw(){
-        ctx.beginPath();
-        ctx.fillStyle = 'white';
-        ctx.arc(mesto.x,mesto.y,10,0,360);
-        ctx.fill();
+function draw(color,size){
+
         
+            
+       ctx.beginPath();
+
+       ctx.lineCap = "round";
+        ctx.strokeStyle = `${color}`;
+        ctx.lineWidth = size;
         
-    
+        console.log(position2)
+        ctx.moveTo(position2.x,position2.y);        
+        ctx.lineTo(position.x,position.y);
+        ctx.stroke();  
+
+        
+        position2.x = position.x
+        position2.y = position.y 
+        
 }
 
 
-function animate() {
+/*function animate() {
     //ctx.clearRect(0, 0, canvas.width, canvas.height); 
-    draw();
+    draw(selectedColor);
             requestAnimationFrame(animate);
 }
 
 
-animate();
+animate();*/
